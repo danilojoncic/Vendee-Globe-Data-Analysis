@@ -1,0 +1,1 @@
+#The purpose of this file is to save the contents into a Postgres db
