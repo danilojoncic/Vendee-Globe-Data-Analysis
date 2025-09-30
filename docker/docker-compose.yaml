@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  data_creation:
+    build:
+      context: ../data-creation
+      dockerfile: ../docker/Dockerfile-data-creation
+    container_name: data_creation_v1
+    volumes:
+      - ../data-creation/files:/app/files
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
