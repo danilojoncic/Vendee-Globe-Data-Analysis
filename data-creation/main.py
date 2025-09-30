@@ -1,5 +1,8 @@
+import scraper
+
+
 def main():
-    pass
+    scraper.download()
 
 
 

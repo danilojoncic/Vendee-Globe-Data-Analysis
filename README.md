@@ -5,6 +5,14 @@ Discoveries:
 The French and English versions of the Vendee Globe website use different time zones
 Classement mis à jour à 03h00, 07h00, 11h00, 15h00, 19h00 et 23h00. FRA
 Ranking updated at 02h00, 06h00, 10h00, 14h00, 18h00 et 22h00. (UTC time) ENG
+30.09.2025@15:53
+The tracking data from the first and first half of the second day is not available
+10.11.2024 and 11.11.2024
+
+30.09.2025@15:59
+On my macbook air m2 with 16gb ram it took 3:30 seconds to download all the available leaderboard data
+using the threadpool in the code 
+56.673.095 bytes (57 MB on disk) for 697 items
 
 Acknowledgments:
 https://blog.geotribu.net/2024/12/02/track-the-vendée-globe-race-with-python-and-qgis/?utm_source=chatgpt.com#steps-to-follow
