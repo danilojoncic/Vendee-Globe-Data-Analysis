@@ -24,5 +24,7 @@ The VendeeGlobe website for the tracker is using weather forecasting for the "cu
 #### 30.09.2025@16:33
 The .xlsx file has some very specific contents which need to be carefully parsed
 
+### 30.09.2025@20:14
+To open the .xlsx file needed to use python-calamine engine 
 Acknowledgments:
 https://blog.geotribu.net/2024/12/02/track-the-vendée-globe-race-with-python-and-qgis/?utm_source=chatgpt.com#steps-to-follow
