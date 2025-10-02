@@ -26,5 +26,10 @@ The .xlsx file has some very specific contents which need to be carefully parsed
 
 ### 30.09.2025@20:14
 To open the .xlsx file needed to use python-calamine engine 
-Acknowledgments:
-https://blog.geotribu.net/2024/12/02/track-the-vendée-globe-race-with-python-and-qgis/?utm_source=chatgpt.com#steps-to-follow
+
+### 02.10.2025@17:15
+Studying Apache Spark, starting to like it. Plan is to use it for the reading and organizing the 697 .xlsx files
+
+### Acknowledgments:
+- https://blog.geotribu.net/2024/12/02/track-the-vendée-globe-race-with-python-and-qgis/?utm_source=chatgpt.com#steps-to-follow
+- Functor Data Engineering Course
