@@ -64,4 +64,5 @@ def download(max_workers=10):
         for future in tqdm(as_completed(futures), total=len(futures), desc="Downloading"):
             result = future.result()
             logger.info(result)
+    executor.shutdown()
     logger.info("✔ Finished downloading all files.")

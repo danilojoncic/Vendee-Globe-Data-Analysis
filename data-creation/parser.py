@@ -2,6 +2,7 @@ import os
 import pandas as pd
 import logging
 from tqdm import tqdm
+import python_calamine
 
 logging.basicConfig(
     level=logging.INFO,
@@ -211,6 +212,8 @@ def parse_directory():
         logger.warning("No files found in directory")
         return
 
+
+
     logger.info(f"Found {len(files)} files to process")
 
     df_total = pd.DataFrame()
@@ -231,4 +234,3 @@ def parse_directory():
 
 
 
-parse_file("/Users/danny/PycharmProjects/Vendee-Globe-Data-Analysis/data-creation/files/leaderboard_20241113_180000.xlsx")

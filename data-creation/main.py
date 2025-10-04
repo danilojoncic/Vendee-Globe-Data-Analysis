@@ -5,7 +5,7 @@ import saver
 
 
 def main():
-    #scraper.download()
+    scraper.download()
     parser.parse_directory()
     combiner.add_weather()
     saver.save_to_postgres()
