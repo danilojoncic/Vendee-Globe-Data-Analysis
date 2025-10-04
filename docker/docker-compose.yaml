@@ -8,6 +8,7 @@ services:
     container_name: data_creation_v1
     volumes:
       - ../data-creation/files:/app/files
+      - ../data-creation/files:/app/output
     environment:
       - PYTHONUNBUFFERED=1
     restart: unless-stopped

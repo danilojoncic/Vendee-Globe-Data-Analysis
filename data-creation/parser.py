@@ -14,6 +14,7 @@ logger = logging.getLogger(__name__)
 
 FILES_DIR = os.path.join(os.path.dirname(__file__), "files")
 OUTPUT_DIR = os.path.join(os.path.dirname(__file__), "output")
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 
 # going from degrees and decimal minutes
@@ -59,6 +60,8 @@ def parse_distance(distance: str) -> float:
         raise
 
 
+
+
 def parse_file(filename: str) -> pd.DataFrame:
     logger.info(f"Parsing file: {filename}")
 
@@ -69,8 +72,29 @@ def parse_file(filename: str) -> pd.DataFrame:
         date_part = pd.to_datetime(date_str, format="%Y%m%d").date()
         logger.debug(f"Extracted date: {date_part}")
 
-        #Special reading using calamine as engine
-        df = pd.read_excel(filename, engine="calamine", skiprows=3)
+        df_check = pd.read_excel(filename, engine="calamine", skiprows=3, nrows=1)
+
+        # Check if ARV format exists
+        if any('arrivée' in str(col).lower() or 'arrival date' in str(col).lower() for col in df_check.columns):
+            logger.info("Detected ARV format, searching for racing table...")
+
+            # Read full file to find racing header
+            df_full = pd.read_excel(filename, engine="calamine", header=None)
+
+            beginning_of_racing_rows = 3  # default
+            for idx in range(len(df_full)):
+                row_values = df_full.iloc[idx].astype(str).str.cat(sep=' ')
+                if 'Depuis 30 minutes' in row_values or 'Since 30 minutes' in row_values:
+                    beginning_of_racing_rows = idx
+                    logger.info(f"Found racing data starting at row {idx}")
+                    break
+        else:
+            beginning_of_racing_rows = 3
+
+
+
+
+        df = pd.read_excel(filename, engine="calamine", skiprows=beginning_of_racing_rows)
 
         df = df.iloc[:, 1:]
         df = df.iloc[:-4, :]
@@ -80,6 +104,15 @@ def parse_file(filename: str) -> pd.DataFrame:
         df.columns = df.columns.str.replace(r'[\r\n]+', ' ', regex=True).str.strip()
         # Cleaning row strings of useless tabs and spaces
         df = df.map(lambda x: str(x).replace("\r\n", " ").strip() if isinstance(x, str) else x)
+
+        #Get rid of RET,DNF or ARV Sailors
+        first_col = df.columns[0]
+        df = df[~df[first_col].astype(str).str.strip().isin(['RET', 'DNF', 'ARV'])]
+        df = df.reset_index(drop=True)
+
+
+
+
 
         # Renaming
         df.rename(columns={
@@ -118,6 +151,8 @@ def parse_file(filename: str) -> pd.DataFrame:
         df["Time in France"] = df["Time in France"].apply(lambda t: t.split()[0])
         df["Time in France"] = df["Time in France"].apply(
             lambda t: pd.to_datetime(f"{date_part} {t}", format="%Y-%m-%d %H:%M"))
+
+
 
         df["Heading 30min"] = df["Heading 30min"].apply(parse_heading)
         df["Heading Last Report"] = df["Heading Last Report"].apply(parse_heading)
@@ -180,7 +215,6 @@ def parse_directory():
 
     df_total = pd.DataFrame()
 
-    # Use tqdm for progress bar
     for file in tqdm(files, desc="Processing files", unit="file"):
         try:
             file_path = os.path.join(FILES_DIR, file)
@@ -194,3 +228,7 @@ def parse_directory():
     df_total.to_csv(output_path, index=False)
     logger.info(f"Successfully saved combined data to {output_path}")
     logger.info(f"Total rows in combined dataset: {len(df_total)}")
+
+
+
+parse_file("/Users/danny/PycharmProjects/Vendee-Globe-Data-Analysis/data-creation/files/leaderboard_20241113_180000.xlsx")

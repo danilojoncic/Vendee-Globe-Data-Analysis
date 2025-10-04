@@ -5,8 +5,8 @@ import saver
 
 
 def main():
-    scraper.download()
-    #parser.parse_directory()
+    #scraper.download()
+    parser.parse_directory()
     combiner.add_weather()
     saver.save_to_postgres()
     saver.erase_raw_data()

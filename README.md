@@ -51,8 +51,11 @@ so other non sailors can hopefully understand the ideas and the concepts
 Just found out that the format of the xlsx files completely changes once a boat finishes the race, as it completely destroys the pattern
 by introducing another header inside the file for the boats still racing and those that finished
 
+### 04.10.2025@03:26
+Race retirements are also messing up the parser
 
-
+### 04.10.2025@03:31
+Why use FIN or finished when you can use ARV for arrived, :(
 ### Acknowledgments:
 - https://blog.geotribu.net/2024/12/02/track-the-vendée-globe-race-with-python-and-qgis/?utm_source=chatgpt.com#steps-to-follow
 - Functor Data Engineering Course
