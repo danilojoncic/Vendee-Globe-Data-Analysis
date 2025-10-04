@@ -212,6 +212,10 @@ def parse_directory():
         logger.warning("No files found in directory")
         return
 
+    if os.path.exists(OUTPUT_DIR + "/total.csv" ):
+        logger.info(f"Output file already exists at {OUTPUT_DIR}. Skipping processing.")
+        logger.info("Delete the file if you want to regenerate it.")
+        return
 
 
     logger.info(f"Found {len(files)} files to process")
