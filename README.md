@@ -47,6 +47,10 @@ saved to csv and later on to Postgres
 Thinking of writting a small dictionary or guide book with all the domain knowledge 
 so other non sailors can hopefully understand the ideas and the concepts
 
+### 04.10.2025@03:12
+Just found out that the format of the xlsx files completely changes once a boat finishes the race, as it completely destroys the pattern
+by introducing another header inside the file for the boats still racing and those that finished
+
 
 
 ### Acknowledgments:
