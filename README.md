@@ -56,6 +56,23 @@ Race retirements are also messing up the parser
 
 ### 04.10.2025@03:31
 Why use FIN or finished when you can use ARV for arrived, :(
+
+
+### 04.10.2025@17:16
+pen meteo api has a limit of:
+600 calls / minute
+5.000 calls / hour
+
+### 04.10.2025@18:15
+The weather data fetching is going to last close to 4 hours
+
+### 04.10.2025@22:10
+Turns out that they dont even know their api limits, so its pretty much
+just running the combiner fetcher script , waiting for the response to go bad
+and then doing the same thing again until all 18k rows are downloaded as chunks
+
+
+
 ### Acknowledgments:
 - https://blog.geotribu.net/2024/12/02/track-the-vendée-globe-race-with-python-and-qgis/?utm_source=chatgpt.com#steps-to-follow
 - Functor Data Engineering Course
