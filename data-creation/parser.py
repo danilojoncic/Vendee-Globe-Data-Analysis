@@ -2,7 +2,6 @@ import os
 import pandas as pd
 import logging
 from tqdm import tqdm
-import python_calamine
 
 logging.basicConfig(
     level=logging.INFO,
