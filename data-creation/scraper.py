@@ -42,6 +42,11 @@ def download_file(ts: str):
 
 
 def download():
+    files = [f for f in os.listdir(FILES_DIR) if os.path.isfile(os.path.join(FILES_DIR, f))]
+    if len(files) == 697:
+        print(f"{Fore.CYAN}✔ Folder already has 697 files, skipping download.{Style.RESET_ALL}")
+        return
+
     timestamps = list(generate_timestamps(start_date, end_date, step_hours=1))
 
     with ThreadPoolExecutor(max_workers=10) as executor:
@@ -50,5 +55,4 @@ def download():
         for future in tqdm(as_completed(futures), total=len(futures), desc="Downloading"):
             print(future.result())
 
-
-
+    print(f"{Fore.YELLOW}FINISHED Downloading{Style.RESET_ALL}")

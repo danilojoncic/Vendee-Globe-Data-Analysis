@@ -30,6 +30,25 @@ To open the .xlsx file needed to use python-calamine engine
 ### 02.10.2025@17:15
 Studying Apache Spark, starting to like it. Plan is to use it for the reading and organizing the 697 .xlsx files
 
+### 04.10.2025@01:22
+When parsing the excel with pandas dataframes came to the realisation that Jean Le Cam is the exception with his name
+also found out this symbol exists: "°", used to represent degreees, but not needed as im turing strings for coordinates into floats
+
+
+### 04.10.2025@01:35
+Thinking of writting a small dictionary or guide book with all the domain knowledge 
+so other non sailors can hopefully understand the ideas and the concepts
+
+
+### 04.10.2025@02:01
+By carefully parsing from .xlsx to csv, and getting rid of the excel junk decreased the size of a file 
+from 82KB to 7KB that more than 10X decrease in size just for the intermediary dataframe, will write data comparison once 
+saved to csv and later on to Postgres
+Thinking of writting a small dictionary or guide book with all the domain knowledge 
+so other non sailors can hopefully understand the ideas and the concepts
+
+
+
 ### Acknowledgments:
 - https://blog.geotribu.net/2024/12/02/track-the-vendée-globe-race-with-python-and-qgis/?utm_source=chatgpt.com#steps-to-follow
 - Functor Data Engineering Course
