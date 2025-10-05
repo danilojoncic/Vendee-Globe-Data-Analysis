@@ -3,6 +3,8 @@
 
 import logging
 import os
+from time import sleep
+
 import requests
 import pandas as pd
 from datetime import datetime, timedelta
@@ -22,6 +24,7 @@ logger = logging.getLogger(__name__)
 
 OUTPUT_DIR = os.path.join(os.path.dirname(__file__), "output")
 CHUNKS_DIR = os.path.join(os.path.dirname(__file__), "chunks")
+WIND_DIR = os.path.join(os.path.dirname(__file__), "wind")
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 
@@ -39,7 +42,7 @@ def create_fetch_parameters_csv():
     df_rest.to_csv(os.path.join(OUTPUT_DIR, "fetch_parameters_rest.csv"), index=False)
 
 
-def call_for_data(which_part: int, chunk_size: int = 500):
+def call_for_data(which_part: int, chunk_size: int = 100):
     if which_part == 0:
         input_file = os.path.join(OUTPUT_DIR, "fetch_parameters_first9999.csv")
         output_file_base = "first_part_with_wind"
@@ -87,6 +90,7 @@ def call_for_data(which_part: int, chunk_size: int = 500):
         chunk_file = os.path.join(CHUNKS_DIR, f"{output_file_base}_chunk_{start}_{end}.csv")
         df_chunk.to_csv(chunk_file, index=False)
         logger.info(f"Saved chunk {start}-{end} to {chunk_file}")
+        sleep(60)
 
 
 
@@ -104,7 +108,7 @@ def fetch_weather_for_row(row, max_retries=3):
 
     for attempt in range(max_retries):
         try:
-            response = requests.get(url, timeout=10)
+            response = requests.get(url, timeout=60)
             response.raise_for_status()  # Raise error if status != 200
             data = response.json()
             hourly = data.get("hourly", {})
@@ -121,10 +125,11 @@ def fetch_weather_for_row(row, max_retries=3):
             print(f"Attempt {attempt+1} failed for {lat},{lon} at {row_time}: {e}")
             time.sleep(2)  # wait a bit before retrying
 
-    # If all retries fail
     return None, None, None
 
-
+def kmh_to_knots(kmh: float) -> float:
+    knots =  (kmh / 1.852)
+    return round(knots,1)
 
 
 
@@ -133,14 +138,53 @@ def add_weather():
         logger.info(f"Origin file does not exist {OUTPUT_DIR}. Skipping processing.")
         logger.info("Generate or drop in the file in order to use this step")
         return
-    pass
+    if not os.path.exists(WIND_DIR + "/wind_data.csv" ):
+        logger.info(f"Wind file does not exist {WIND_DIR}. Skipping processing.")
+        logger.info("Generate or drop in the file in order to use this step")
+        return
 
+    df_vendee = pd.read_csv(OUTPUT_DIR + "/total.csv")
+    df_wind_data = pd.read_csv(WIND_DIR + "/wind_data.csv")
 
-def main():
-    call_for_data(which_part=0)
+    print(df_vendee.info())
+    print(df_wind_data.info())
 
-if __name__ == "__main__":
-    main()
+    df_wind_data["Wind Speed"] = df_wind_data["Wind Speed"].apply(kmh_to_knots)
+    df_wind_data["Wind Gust"] = df_wind_data["Wind Gust"].apply(kmh_to_knots)
+
+    df_wind_data["Latitude"] = df_wind_data["Latitude"].round(4)
+    df_wind_data["Longitude"] = df_wind_data["Longitude"].round(4)
+    df_vendee["Latitude"] = df_vendee["Latitude"].round(4)
+    df_vendee["Longitude"] = df_vendee["Longitude"].round(4)
+
+    df_wind_data = df_wind_data.dropna()
+
+    merged = pd.merge(
+        df_wind_data,
+        df_vendee,
+        on=["Time in France", "Sailor", "Latitude", "Longitude"],
+        how="inner")
+
+    merged.to_csv(OUTPUT_DIR + "/dataset.csv", index=False)
+
+def combine_chunks():
+    os.makedirs(WIND_DIR, exist_ok=True)
+    output_path = os.path.join(WIND_DIR, "wind_data.csv")
+
+    files = sorted([os.path.join(CHUNKS_DIR, f) for f in os.listdir(CHUNKS_DIR) if f.endswith(".csv")])
+    if not files:
+        logger.warning("No chunk files found.")
+        return
+
+    for i, f in enumerate(tqdm(files, desc="Merging incrementally")):
+        df = pd.read_csv(f)
+        mode = "w" if i == 0 else "a"
+        header = i == 0
+        df.to_csv(output_path, mode=mode, header=header, index=False)
+        del df
+
+    logger.info(f"✅ Combined CSV saved to {output_path}")
+
 
 
 

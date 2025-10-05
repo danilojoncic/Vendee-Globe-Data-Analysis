@@ -71,8 +71,24 @@ Turns out that they dont even know their api limits, so its pretty much
 just running the combiner fetcher script , waiting for the response to go bad
 and then doing the same thing again until all 18k rows are downloaded as chunks
 
+### 04.10.2025@22:10
+2025-10-04 22:11:58,682 - INFO - Processing 9999 rows in chunks of 500...
+2025-10-04 22:11:58,682 - INFO - Last completed chunk ends at row 2500. Resuming from next chunk...
+This is saving me
 
+
+### 04.10.2025@22:45
+Open Meteo API is returning wind speed in km/h so they need to be turned into knots
+(1 knot in speed is 1 nautical mile per hour)
+
+
+### 05.10.2025@00:03
+If WiFi does not work, use Mobile Data
+
+### 05.10.2025@17:44
+1 Nautical Mile is 1852 Meters or 1.852 Kilometers
 
 ### Acknowledgments:
 - https://blog.geotribu.net/2024/12/02/track-the-vendée-globe-race-with-python-and-qgis/?utm_source=chatgpt.com#steps-to-follow
 - Functor Data Engineering Course
+- Free (Limited) API for weather forecast and historical data per latitude and longitude https://open-meteo.com
