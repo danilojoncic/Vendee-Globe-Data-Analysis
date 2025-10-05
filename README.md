@@ -1,4 +1,5 @@
 # Vendée Globe Data Analysis (but more like Engineering) Project
+<img width="792" height="373" alt="logo-vg_rvb" src="https://github.com/user-attachments/assets/05a5fb54-1fe9-4699-b025-07213776b935" />
 
 The goal of this project is to deepen my knowledge in Data Engineering and Data Analysis, and hopefully impress the team at The Ocean Race enough to land a position. This repository documents the entire journey of building an end-to-end data pipeline for race tracking data.
 
