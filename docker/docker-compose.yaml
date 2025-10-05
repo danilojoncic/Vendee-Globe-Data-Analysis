@@ -33,5 +33,21 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+  metabase:
+    image: metabase/metabase:v0.56.x
+    container_name: metabase
+    ports:
+      - "3000:3000"
+    environment:
+      MB_DB_TYPE: postgres
+      MB_DB_DBNAME: race_data
+      MB_DB_PORT: 5432
+      MB_DB_USER: admin
+      MB_DB_PASS: admin123
+      MB_DB_HOST: postgres
+    depends_on:
+      - postgres
+    restart: "no"
+
 volumes:
-    postgres_data:
+  postgres_data:
