@@ -12,4 +12,26 @@ services:
       - ../data-creation/wind:/app/wind
     environment:
       - PYTHONUNBUFFERED=1
+      - POSTGRES_HOST=postgres
+      - POSTGRES_DB=race_data
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin123
+    depends_on:
+      - postgres
     restart: "no"
+
+  postgres:
+    image: postgres:15-alpine3.21
+    container_name: postgres_db
+    restart: "no"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: race_data
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+    postgres_data:
