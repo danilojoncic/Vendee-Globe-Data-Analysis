@@ -12,4 +12,4 @@ services:
       - ../data-creation/wind:/app/wind
     environment:
       - PYTHONUNBUFFERED=1
-    restart: unless-stopped
+    restart: "no"
