@@ -3,7 +3,7 @@
 The goal of this project is to deepen my knowledge in Data Engineering and Data Analysis, and hopefully impress the team at The Ocean Race enough to land a position. This repository documents the entire journey of building an end-to-end data pipeline for race tracking data.
 
 ## Pipeline Overview
-<img width="1071" height="531" alt="Screenshot 2025-10-06 at 00 26 43" src="https://github.com/user-attachments/assets/f12a257e-c2df-40e8-a78d-2826179c0adc" />
+<img width="1037" height="520" alt="Screenshot 2025-10-06 at 00 28 59" src="https://github.com/user-attachments/assets/92a38f34-b1ac-4271-8761-5e8c884dc637" />
 
 
 
