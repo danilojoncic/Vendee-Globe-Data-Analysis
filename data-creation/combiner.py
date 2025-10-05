@@ -25,7 +25,7 @@ logger = logging.getLogger(__name__)
 OUTPUT_DIR = os.path.join(os.path.dirname(__file__), "output")
 CHUNKS_DIR = os.path.join(os.path.dirname(__file__), "chunks")
 WIND_DIR = os.path.join(os.path.dirname(__file__), "wind")
-os.makedirs(OUTPUT_DIR, exist_ok=True)
+os.makedirs(WIND_DIR, exist_ok=True)
 
 
 #this function is only written for presentation sake, the true combining takes place
