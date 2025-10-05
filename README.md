@@ -88,6 +88,13 @@ If WiFi does not work, use Mobile Data
 ### 05.10.2025@17:44
 1 Nautical Mile is 1852 Meters or 1.852 Kilometers
 
+
+### 05.10.2025@21:02
+Decided to create a star scheme for the data inserted into postgres
+
+### 05.10.2025@21:25
+Do not vibe code database insertions
+
 ### Acknowledgments:
 - https://blog.geotribu.net/2024/12/02/track-the-vendée-globe-race-with-python-and-qgis/?utm_source=chatgpt.com#steps-to-follow
 - Functor Data Engineering Course
