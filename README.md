@@ -1,10 +1,11 @@
-# Vendée Globe Data Engineering Project
+# Vendée Globe Data Analysis (but more like Engineering) Project
 
 The goal of this project is to deepen my knowledge in Data Engineering and Data Analysis, and hopefully impress the team at The Ocean Race enough to land a position. This repository documents the entire journey of building an end-to-end data pipeline for race tracking data.
 
 ## Pipeline Overview
+<img width="1071" height="531" alt="Screenshot 2025-10-06 at 00 26 43" src="https://github.com/user-attachments/assets/f12a257e-c2df-40e8-a78d-2826179c0adc" />
 
-![Pipeline Image]
+
 
 ## Pipeline Steps
 
@@ -291,5 +292,4 @@ Do not vibe code database insertions.
 - [Geotribu Blog - Track the Vendée Globe with Python and QGIS](https://blog.geotribu.net/2024/12/02/track-the-vendée-globe-race-with-python-and-qgis/?utm_source=chatgpt.com#steps-to-follow)
 - Functor Data Engineering Course
 - [Open Meteo API](https://open-meteo.com) - Free (limited) weather forecast and historical data by coordinates
-
----
+- FossFLOW for diagram
