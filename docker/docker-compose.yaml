@@ -12,10 +12,6 @@ services:
       - ../data-creation/wind:/app/wind
     environment:
       - PYTHONUNBUFFERED=1
-      - POSTGRES_HOST=postgres
-      - POSTGRES_DB=race_data
-      - POSTGRES_USER=admin
-      - POSTGRES_PASSWORD=admin123
     depends_on:
       - postgres
     restart: "no"

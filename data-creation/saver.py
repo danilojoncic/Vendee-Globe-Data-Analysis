@@ -105,12 +105,18 @@ def save_to_postgres():
     Session = sessionmaker(bind=engine)
     session = Session()
 
+    existing_count = session.query(FactRace).count()
+    if existing_count > 0:
+        logging.info(f"Database already contains {existing_count} rows in 'fact_race'. Skipping population.")
+        return
+    else:
+        logging.info("No existing records found. Proceeding with population...")
+
     logging.info(f"Loading CSV: {CSV_FILE}")
     df = pd.read_csv(CSV_FILE, parse_dates=["Time in France"])
 
     logging.info("Inserting data...")
     for _, row in df.iterrows():
-        # Dimensions
         sailor = get_or_create(
             session,
             Sailor,
@@ -145,7 +151,6 @@ def save_to_postgres():
             wind_gust=row["Wind Gust"]
         )
 
-        # Fact table: prevent duplicates by checking existing combination
         existing_fact = session.query(FactRace).filter_by(
             sailor_id=sailor.id,
             time_id=time.id,
