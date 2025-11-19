@@ -28,7 +28,7 @@ The goal of this project is to deepen my knowledge in Data Engineering and Data 
    - Creating admin account
    - Connecting to Postgres database
    - Building interactive dashboards
-10. **Performance Optimization** - Implementing PySpark for transformations in a separate directory with docker-compose for resource management
+10. **Performance Optimization** - Implementing PySpark for transformations in a separate project
 
 ## About the Vendée Globe
 
@@ -194,9 +194,6 @@ CMD ["python", "main.py"]
 │   ├── Dockerfile-data-presentation-frontend
 │   └── docker-compose.yaml
 ├── requirements.txt
-└── spark
-    ├── docker-compose.yaml  # Separated for resource management
-    └── sparky.py  # PySpark transformations
 ```
 
 ## Discoveries
